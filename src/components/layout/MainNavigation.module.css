@@ -1,0 +1,65 @@
+/* General Header Styling */
+.header {
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #1F1F1F; /* Darker, neutral gray for a modern look */
+    padding: 0 2rem;
+    font-family: 'Lato', sans-serif;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    position: relative;
+    z-index: 10; /* Ensure navbar stays on top */
+  }
+  
+  /* Logo Container Styling */
+  .logo {
+    display: flex;
+    align-items: center;
+  }
+  
+/* Logo Image Styling */
+.logoImg {
+    height: 4rem; /* Increased size for more prominence */
+    width: auto; /* Maintain aspect ratio */
+    margin-right: 0.5rem; /* Space between logo and text */
+  }
+  
+  /* Logo Text Styling */
+  .logoText {
+    color: #FFFFFF; /* Crisp white */
+    font-size: 1.5rem; /* Keep the text size reduced for balance */
+    font-weight: 500; /* Medium weight for a cleaner look */
+    margin: 0;
+  }
+  
+  /* Navigation Styling */
+  .header ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    gap: 1.5rem; /* Add gap for consistent spacing */
+  }
+  
+  .header li {
+    margin: 0; /* Remove margin to use gap for spacing */
+  }
+  
+  /* Link Styling */
+  .header a {
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 400; /* Regular weight for a clean look */
+    color: #FFFFFF; /* Crisp white */
+    transition: color 0.3s ease, transform 0.2s ease; /* Smooth hover effect */
+    display: flex;
+    align-items: center;
+  }
+  
+  .header a:hover {
+    color: #AAAAAA; /* Muted light gray on hover */
+    transform: scale(1.05); /* Slight scaling on hover for interactivity */
+  }
+  

@@ -1,0 +1,44 @@
+/* Product Item Container */
+.item {
+    list-style: none; /* Remove default list styling */
+    margin: 1rem; /* Add some spacing around each product item */
+    padding: 0; /* Remove any padding */
+  }
+  
+  /* Image Styling */
+  .item img {
+    width: 100%; /* Make the image responsive to fill its container */
+    max-width: 180px; /* Maximum width of the image */
+    height: auto; /* Maintain the aspect ratio */
+    display: block; /* Remove any inline block spacing */
+    margin: 0 auto 1rem; /* Center the image and add space below */
+    border-radius: 8px; /* Slightly round the corners */
+    object-fit: cover; /* Crop the image to fill the area */
+  }
+  
+  /* Content Container */
+  .item div {
+    text-align: center; /* Center-align the text */
+  }
+  
+  /* Product Name Styling */
+  .item h2 {
+    font-size: 1.2rem; /* Moderate font size for product name */
+    margin: 0.5rem 0; /* Add space above and below the name */
+    color: #333; /* Darker color for better contrast */
+  }
+  
+/* General Paragraph Styling (for dimensions) */
+  .item h3 {
+    font-size: 0.8rem; /* Smaller font size for the price */
+    color: #666; /* Lighter color for price to differentiate it */
+    font-weight: lighter;
+    margin: 0; /* Remove default margins */
+  }
+  
+  /* Price Styling */
+.price {
+    font-size: 1.2rem; /* Larger font size for more emphasis */
+    color: #393939; /* Darker color for more contrast */
+    margin: 1rem 0; /* Add some space above and below the price */
+  }
