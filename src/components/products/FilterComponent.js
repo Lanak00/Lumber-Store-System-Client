@@ -32,7 +32,7 @@ function FilterComponent({ typeFilter, onTypeChange, minPrice, maxPrice, onMinPr
           }}
         >
           <div className={classes['filter-section']}>
-            <label className={classes['filter-label']}>Type: </label>
+            <label className={classes['filter-label']}>Tip: </label>
             <div className={classes['filter-checkbox-group']}>
               <label className={classes['filter-checkbox-label']}>
                 <input
@@ -42,7 +42,7 @@ function FilterComponent({ typeFilter, onTypeChange, minPrice, maxPrice, onMinPr
                   onChange={onTypeChange}
                   className={classes['filter-checkbox']}
                 />
-                Wood
+                Drvo
               </label>
               <label className={classes['filter-checkbox-label']}>
                 <input
@@ -52,13 +52,13 @@ function FilterComponent({ typeFilter, onTypeChange, minPrice, maxPrice, onMinPr
                   onChange={onTypeChange}
                   className={classes['filter-checkbox']}
                 />
-                Panel
+                Plocasti materijali
               </label>
             </div>
           </div>
 
           <div className={classes['filter-section']}>
-            <label className={classes['filter-label']}>Min Price: </label>
+            <label className={classes['filter-label']}>Minimalna cena: </label>
             <input
               type="number"
               value={minPrice === 0 ? '' : minPrice}
@@ -69,7 +69,7 @@ function FilterComponent({ typeFilter, onTypeChange, minPrice, maxPrice, onMinPr
           </div>
 
           <div className={classes['filter-section']}>
-            <label className={classes['filter-label']}>Max Price: </label>
+            <label className={classes['filter-label']}>Maksimalna cena: </label>
             <input
               type="number"
               value={maxPrice === 0 ? '' : maxPrice}

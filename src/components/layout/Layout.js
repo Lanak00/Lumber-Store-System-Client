@@ -4,7 +4,7 @@ import MainNavigation from './MainNavigation';
 function Layout(props) {
     return(
         <div>
-            <MainNavigation />
+            <MainNavigation isLoggedIn={props.isLoggedIn} setIsLoggedIn={props.setIsLoggedIn}/>
             <main className={classes.main}>
                 {props.children}
             </main>

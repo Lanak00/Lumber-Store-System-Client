@@ -9,9 +9,9 @@ function SortComponent({ sortOrder, onSortChange }) {
         onChange={(e) => onSortChange(e.target.value)} 
         className={classes.sortSelect}
       >
-        <option value="" disabled hidden>Sort by Price</option> 
-        <option value="asc">Ascending</option>
-        <option value="desc">Descending</option>
+        <option value="" disabled hidden>Sortiraj po ceni</option> 
+        <option value="asc">Rastuce</option>
+        <option value="desc">Opadajuce</option>
       </select>
     </div>
   );

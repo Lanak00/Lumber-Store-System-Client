@@ -34,7 +34,7 @@
     z-index: 100;
     width: 180px; /* Slightly narrower for better alignment */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 14px;
+    font-size: 12px;
     color: #333;
     transition: opacity 0.3s ease;
     opacity: 1;
@@ -46,7 +46,7 @@
   }
   
   .filter-label {
-    font-weight: 600;
+    font-weight: 500;
     margin-bottom: 4px; /* Slightly reduced margin below the label */
     display: block;
     color: #444;
@@ -56,13 +56,13 @@
   .filter-checkbox-group {
     display: flex;
     gap: 8px; /* Space between checkboxes and labels */
-    margin-top: 5px;
+    margin-top: 12px;
   }
   
   .filter-checkbox-label {
     display: flex;
     align-items: center;
-    font-size: 15px; /* Larger text for labels */
+    font-size: 14px; /* Larger text for labels */
     color: #333; /* Stronger color for emphasis */
     cursor: pointer;
   }

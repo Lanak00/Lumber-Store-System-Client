@@ -1,24 +1,48 @@
 import { Link } from 'react-router-dom';
 import classes from './MainNavigation.module.css';
 import logo from '../../assets/logo/logo_image.png';
+import { FaShoppingCart } from 'react-icons/fa';
 
-function MainNavigation() {
-    return (
-        <header className={classes.header}>
-            <div className={classes.logo}>
-                <img src={logo} alt="Lumber Shop Logo" className={classes.logoImg} />
-                <span className={classes.logoText}>Lumber Shop</span>
-            </div>
-            <nav>
-                <ul>
-                    <li>
-                        <Link to="/">Products</Link>
-                    </li>
-                </ul>
-            </nav>
-        </header>
-    );
+function MainNavigation({ isLoggedIn, setIsLoggedIn }) {
+
+  const handleLogout = () => {
+    localStorage.removeItem('token'); 
+    setIsLoggedIn(false); // Update state on logout
+  };
+
+  return (
+    <header className={classes.header}>
+      <div className={classes.logo}>
+        <img src={logo} alt="Lumber Shop Logo" className={classes.logoImg} />
+        <span className={classes.logoText}>Lumber Shop</span>
+      </div>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/">Proizvodi</Link>
+          </li>
+          {isLoggedIn ? (
+            <>
+              <li>
+                <Link to="/cart">
+                  <FaShoppingCart size={24} /> 
+                </Link>
+              </li>
+              <li>
+                <button onClick={handleLogout} className={classes.actionButton}>
+                  Odjavi se
+                </button>
+              </li>
+            </>
+          ) : (
+            <li>
+              <Link to="/login" className={classes.actionButton}>Prijavi se</Link> 
+            </li>
+          )}
+        </ul>
+      </nav>
+    </header>
+  );
 }
 
 export default MainNavigation;
-

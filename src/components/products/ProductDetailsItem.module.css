@@ -1,0 +1,142 @@
+/* General Styling */
+.productDetails {
+  display: flex; /* Create a two-column layout */
+  gap: 2rem; /* Space between the columns */
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #fff; /* Light background for contrast */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
+  font-family: 'Lato', sans-serif; /* Use a modern sans-serif font */
+  color: #333; /* Dark gray text color */
+}
+
+/* Left Column - Image */
+.productImage {
+  width: 200px; /* Set a fixed width for the image */
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover; /* Ensures image maintains aspect ratio */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Soft shadow around the image */
+}
+
+/* Right Column - Product Details */
+.productDetailsContent {
+  flex: 1; /* Allow the right column to take up remaining space */
+}
+
+/* Product Name */
+.productName {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #4E342E; /* Darker brown for a woody feel */
+}
+
+/* Product Info Styling */
+.productType,
+.productManufacturer,
+.productDescription,
+.productPrice,
+.productDimensions,
+.productPriceUnit {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+  color: #555; /* Lighter gray for secondary text */
+}
+
+/* Emphasize Price */
+.productPrice {
+  font-weight: bold;
+  color: #6D4C41; /* Medium brown for price */
+}
+
+/* Actions Container */
+.actions {
+  display: flex;
+  align-items: center;
+  margin-top: 1.5rem;
+  gap: 1rem; /* Space between controls */
+}
+
+/* Amount Control Styling */
+.amountControl {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden; /* Ensures buttons and input align properly */
+  background-color: #f7f7f7; /* Light background for the control */
+}
+
+
+/* Amount Input Field */
+.amountInput {
+  width: 3rem;
+  text-align: center;
+  border: none;
+  font-size: 1rem;
+  padding: 0.5rem;
+  background-color: #fff;
+  color: #333;
+  outline: none;
+  appearance: none; /* Removes default styling, including arrows */
+  -moz-appearance: textfield; /* Firefox specific */
+}
+
+/* Remove the number input arrows */
+.amountInput::-webkit-outer-spin-button,
+.amountInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Cubic Meter Control Styling */
+.cubicMeterControl {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Space between input and label */
+}
+
+/* Cubic Meter Label */
+.cubicMeterLabel {
+  font-size: 1rem;
+  color: #555; /* Slightly lighter color to indicate secondary information */
+  margin-right: 0.5rem;
+}
+
+
+/* Button Styling for Increase/Decrease */
+.decreaseButton,
+.increaseButton {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 0.5rem 0.7rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.decreaseButton:hover,
+.increaseButton:hover {
+  background-color: #f0f0f0; /* Subtle hover effect */
+  border-color: #bbb; /* Darker border on hover */
+}
+
+/* Add to Cart Button */
+.addToCartButton {
+  background-color: #8D6E63; /* Warm brown for woody feel */
+  color: #fff;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.addToCartButton:hover {
+  background-color: #795548; /* Darker brown on hover */
+}

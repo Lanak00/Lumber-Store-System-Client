@@ -42,3 +42,10 @@
     color: #393939; /* Darker color for more contrast */
     margin: 1rem 0; /* Add some space above and below the price */
   }
+
+  .cardLink {
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Use the parent element's color */
+    display: block; /* Make the link behave like a block element */
+  }
+  
