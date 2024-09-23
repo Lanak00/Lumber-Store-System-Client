@@ -1,13 +1,15 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
 import classes from './MainNavigation.module.css';
 import logo from '../../assets/logo/logo_image.png';
 import { FaShoppingCart } from 'react-icons/fa';
 
 function MainNavigation({ isLoggedIn, setIsLoggedIn }) {
+const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.removeItem('token'); 
     setIsLoggedIn(false); // Update state on logout
+    navigate("/");
   };
 
   return (
@@ -23,6 +25,9 @@ function MainNavigation({ isLoggedIn, setIsLoggedIn }) {
           </li>
           {isLoggedIn ? (
             <>
+              <li>
+                <Link to="/orders">Moje porudzbine</Link>
+              </li>
               <li>
                 <Link to="/cart">
                   <FaShoppingCart size={24} /> 

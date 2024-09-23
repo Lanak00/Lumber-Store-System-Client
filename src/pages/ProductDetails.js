@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom'; // Import useParams to get the product ID from the URL
+import { useParams } from 'react-router-dom'; 
 import ProductDetailsItem from '../components/products/ProductDetailsItem';
+import CuttingList from '../components/products/CuttingList';
 
 function ProductDetailsPage() {
-  const { productId } = useParams(); // Get the product ID from the URL
-  const [product, setProduct] = useState(null); // State to hold the product details
-  const [isLoading, setIsLoading] = useState(true); // State to handle loading
-  const [error, setError] = useState(null); // State to handle errors
+  const { productId } = useParams(); 
+  const [product, setProduct] = useState(null); 
+  const [isLoading, setIsLoading] = useState(true); 
+  const [error, setError] = useState(null); 
+  const [showCuttingList, setShowCuttingList] = useState(false);
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        setIsLoading(true); // Start loading
+        setIsLoading(true); 
         const response = await fetch(`https://localhost:44364/api/Product/${productId}`);
         
         if (!response.ok) {
@@ -19,21 +21,21 @@ function ProductDetailsPage() {
         }
 
         const data = await response.json();
-        setProduct(data); // Set the product data
-        setIsLoading(false); // End loading
+        setProduct(data); 
+        setIsLoading(false); 
       } catch (err) {
         setError(err.message);
-        setIsLoading(false); // End loading
+        setIsLoading(false); 
       }
     };
 
-    fetchProduct(); // Call the fetch function
-  }, [productId]); // Effect depends on productId
+    fetchProduct(); 
+  }, [productId]); 
 
   const handleAddToCart = (name, amount) => {
     const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
     
-    // Check if the product already exists in the cart
+   
     const existingItemIndex = cartItems.findIndex(item => item.id === productId);
 
     if (existingItemIndex !== -1) {
@@ -57,6 +59,9 @@ function ProductDetailsPage() {
 
      alert(`Added ${amount} of ${name} to cart!`);
   }
+  const handleShowCuttingList = () => {
+    setShowCuttingList(true); // Show the cutting list component
+  }
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -74,7 +79,8 @@ function ProductDetailsPage() {
   const dimensionsText = `${product.dimensions.length}x${product.dimensions.width}`;
 
   return (
-    <ProductDetailsItem
+    <div>
+      <ProductDetailsItem
       image={product.image}
       name={product.name}
       type={product.category}
@@ -84,7 +90,10 @@ function ProductDetailsPage() {
       dimensions={dimensionsText} // Pass the formatted dimensions
       priceUnit={product.priceUnit}
       onAddToCart={handleAddToCart}
+      onShowCuttingList={handleShowCuttingList}
     />
+    {showCuttingList && <CuttingList />}
+    </div>
   );
 }
 

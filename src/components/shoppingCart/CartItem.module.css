@@ -1,0 +1,58 @@
+/* CartItem.module.css */
+
+.cartItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f9f9f9; /* Light background for cart item */
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.cartItemImage {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 20px;
+}
+
+.cartItemDetails {
+    flex-grow: 1;
+}
+
+.cartItemDetails h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.cartItemDetails p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.cartItemActions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: auto; /* Pushes the button to the right */
+}
+
+.removeButton {
+    padding: 8px 16px;
+    background-color: #ff4b4b; /* Red for the remove button */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.removeButton:hover {
+    background-color: #e84343; /* Darker red on hover */
+}

@@ -1,0 +1,11 @@
+.cartItemList {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .emptyCart {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #666;
+  }
+  

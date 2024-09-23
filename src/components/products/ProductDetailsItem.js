@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import classes from './ProductDetailsItem.module.css';
 
-function ProductDetailsItem({ image, name, type, manufacturer, description, price, dimensions, priceUnit, onAddToCart }) {
+function ProductDetailsItem({ image, name, type, manufacturer, description, price, dimensions, priceUnit, onAddToCart, onShowCuttingList  }) {
   const [amount, setAmount] = useState(1);
 
   const increaseAmount = () => setAmount((prevAmount) => prevAmount + 1);
@@ -80,6 +80,11 @@ const unit = categoryName === 'Plocasti materijali' ? 'kom' : categoryName === '
           <button onClick={() => onAddToCart(name, amount)} className={classes.addToCartButton}>
             Dodaj u korpu
           </button>
+          {type === 0 && (
+          <button onClick={onShowCuttingList} className={classes.addCuttingListButton}>
+            Napravi krojnu listu
+          </button>
+          )}
         </div>
       </div>
     </div>

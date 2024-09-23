@@ -1,0 +1,142 @@
+/* Cutting List Container */
+.cuttingListContainer {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    font-family: 'Lato', sans-serif;
+    color: #333;
+  }
+  
+  /* Cutting List Title */
+  .cuttingListTitle {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #4E342E;
+    text-align: center;
+  }
+  
+  /* Input Row */
+  .inputRow {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  /* Input Fields for Width, Height, and Amount */
+  .cuttingListInput {
+    flex: 1;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #333;
+    background-color: #fff;
+    outline: none;
+  }
+  
+  .cuttingListInput::placeholder {
+    color: #aaa; /* Lighter placeholder color */
+  }
+  
+  /* Add Button for Adding New Row */
+  .addCuttingListItemButton {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    padding: 0.7rem 1rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .addCuttingListItemButton:hover {
+    background-color: #327034;
+  }
+  
+  /* Cutting List Items Display */
+  .cuttingListItems {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border-top: 1px solid #e0e0e0;
+  }
+  
+  /* Individual Cutting List Item */
+  .cuttingListItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #e0e0e0;
+    color: #555;
+  }
+  
+  .cuttingListItem:last-child {
+    border-bottom: none;
+  }
+  
+  /* Editable Input for Each Item */
+  .cuttingListItemInput {
+    width: 4rem;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 0.5rem;
+    background-color: #fff;
+    color: #333;
+    outline: none;
+  }
+  
+  .cuttingListItemInput::placeholder {
+    color: #aaa;
+  }
+
+  .addCuttingListItemButton:disabled {
+    background-color: #ccc; /* Light gray background for disabled state */
+    color: #888; /* Darker gray text */
+    cursor: not-allowed; /* Change cursor to indicate it's not clickable */
+    border: none;
+  }
+  
+  /* Remove Button for Each Row */
+  .removeCuttingListItemButton {
+    background-color: #e57373;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .removeCuttingListItemButton:hover {
+    background-color: #d32f2f;
+  }
+  
+  /* Add to Cart Button for Finalizing the Cutting List */
+  .addToCartFromCuttingListButton {
+    background-color: #8D6E63;
+    color: #fff;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin-top: 1.5rem;
+    cursor: pointer;
+    display: block;
+    width: 100%; /* Full-width button */
+    text-align: center;
+    transition: background-color 0.3s;
+  }
+  
+  .addToCartFromCuttingListButton:hover {
+    background-color: #795548;
+  }
+  

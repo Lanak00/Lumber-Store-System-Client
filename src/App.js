@@ -6,6 +6,8 @@ import AllProductsPage from './pages/Products';
 import ProductDetailsPage from './pages/ProductDetails';
 import LoginPage from './pages/Login';
 import RegisterPage from './pages/Register';
+import CartPage from './pages/Cart';
+import MyOrdersPage from './pages/MyOrders';
 
 
 function App() {
@@ -31,6 +33,8 @@ function App() {
         <Route path="/product/:productId" element={<ProductDetailsPage />} />
         <Route path="/login" element={<LoginPage setIsLoggedIn={handleLoginSuccess} />}/>
         <Route path="/register" element = {<RegisterPage/>}/>
+        <Route path="/cart" element={<CartPage />} /> 
+        <Route path="/orders" element={<MyOrdersPage />} />
       </Routes>
     </Layout>
   );
