@@ -4,7 +4,7 @@ import Card from '../layout/Card';
 import { Link } from 'react-router-dom'; 
 
 function ProductItem(props) {
-const dimensionsText = `${props.dimensions.length}x${props.dimensions.width}`;
+const dimensionsText = `${props.dimensions.width}x${props.dimensions.length}`;
 return (
   <li className={classes.item}>
     {/* Wrap Card component with Link to enable navigation to the product details page */}
