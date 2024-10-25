@@ -4,8 +4,8 @@ import classes from './CuttingList.module.css';
 function CuttingList({ hideCuttingList, handleAddCuttingListToCart, productPrice }) {
   const [cuttingList, setCuttingList] = useState([]);
   const [currentEntry, setCurrentEntry] = useState({ width: '', height: '', amount: '' });
-  const [numberOfBoards, setNumberOfBoards] = useState(0); // State to store the number of boards
-  const [totalPrice, setTotalPrice] = useState(0); // State to store the total price
+  const [numberOfBoards, setNumberOfBoards] = useState(0); 
+  const [totalPrice, setTotalPrice] = useState(0); 
 
   const isFormValid = currentEntry.width && currentEntry.height && currentEntry.amount;
 
@@ -24,8 +24,8 @@ function CuttingList({ hideCuttingList, handleAddCuttingListToCart, productPrice
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          boardWidth: 200, // Example width, adjust based on your app logic
-          boardHeight: 100, // Example height
+          boardWidth: 200, 
+          boardHeight: 100, 
           cuttingList: cuttingList.map(item => ({
             width: parseInt(item.width, 10),
             length: parseInt(item.height, 10),
@@ -47,7 +47,7 @@ function CuttingList({ hideCuttingList, handleAddCuttingListToCart, productPrice
       setTotalPrice(calculatedPrice);
     } catch (error) {
       console.error('Error calculating boards:', error);
-      setNumberOfBoards(0); // Reset if API call fails
+      setNumberOfBoards(0);
       setTotalPrice(0);
     }
   };
@@ -69,13 +69,13 @@ function CuttingList({ hideCuttingList, handleAddCuttingListToCart, productPrice
   const clearCuttingList = () => {
     setCuttingList([]);
     localStorage.removeItem('cuttingList');
-    hideCuttingList(); // Hides the cutting list UI
+    hideCuttingList(); 
   };
 
   // Handle adding the cutting list to the cart
   const handleAddToCart = () => {
-    handleAddCuttingListToCart(cuttingList, numberOfBoards, totalPrice); // Adds the cutting list to the cart
-    clearCuttingList(); // Clears the cutting list after adding to cart
+    handleAddCuttingListToCart(cuttingList, numberOfBoards, totalPrice); 
+    clearCuttingList(); 
   };
 
   return (
@@ -138,7 +138,7 @@ function CuttingList({ hideCuttingList, handleAddCuttingListToCart, productPrice
       {cuttingList.length > 0 && (
         <div className={classes.totalPriceContainer}>
           <span>Broj ploca: {numberOfBoards} </span>
-          <span>Cena: {totalPrice.toLocaleString()} RSD</span> {/* Format the price */}
+          <span>Cena: {totalPrice.toLocaleString()} RSD</span> 
         </div>
       )}
 

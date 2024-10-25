@@ -31,22 +31,27 @@ function CartPage() {
     const clientId = getClientIdFromToken(token);
     const orderDate = new Date().toISOString().split('T')[0];
 
-    const orderItems = [
-      ...cartItems.map(item => ({
-        amount: item.amount,
-        productId: item.id
+    const orderItems = cartItems.map(item => ({
+      amount: item.amount,
+      productId: item.id
+    }));
+
+    // Prepare cutting list items for the order
+    const cuttingLists = cuttingCartItems.map(item => ({
+      productId: item.productId,
+      items: item.cuttingList.map(listItem => ({
+        width: parseInt(listItem.dimensions.split('x')[0], 10),
+        length: parseInt(listItem.dimensions.split('x')[1], 10),
+        amount: parseInt(listItem.amount, 10),
       })),
-      ...cuttingCartItems.map(item => ({
-        amount: 1,
-        productId: item.productId
-      }))
-    ];
+    }));
 
     const orderData = {
       date: orderDate,
-      status: 1,
+      status: 1, // Active status for the order
       clientId: clientId,
-      items: orderItems
+      items: orderItems,
+      cuttingLists: cuttingLists, // Include the cutting lists here
     };
 
     try {
@@ -55,7 +60,7 @@ function CartPage() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(orderData)
+        body: JSON.stringify(orderData),
       });
 
       const contentType = response.headers.get("content-type");
@@ -86,71 +91,71 @@ function CartPage() {
   const totalPrice = cartItems.reduce((total, item) => total + item.price * item.amount, 0) +
     cuttingCartItems.reduce((total, item) => total + item.totalPrice, 0);
 
-    return (
-        <div>
-          <h2>Vasa korpa</h2>
-    
-          {/* Render regular cart items using CartItemList */}
-          <CartItemList cartItems={cartItems} removeItem={removeItem} />
-    
-          {/* Render cutting cart items */}
-          {cuttingCartItems.length > 0 && (
-            <div className="cutting-cart-section">
-              <h3>Krojne liste</h3>
-              {cuttingCartItems.map((cuttingItem, index) => (
-                <div className={classes.cartItem} key={index}>
-                  {/* Product Image */}
-                  <img
-                    src={cuttingItem.productImage}  // Assuming productImageUrl is stored in the cuttingCartItems
-                    alt={cuttingItem.productName}
-                    className={classes.cartItemImage}
-                  />
-                  <div className={classes.cartItemDetails}>
-                    <h3>{cuttingItem.productName}</h3>
-                    <ul>
-                      {cuttingItem.cuttingList.map((listItem, listIndex) => (
-                        <li key={listIndex}>
-                          {listItem.dimensions} - {listItem.amount} kom
-                        </li>
-                      ))}
-                    </ul>
-                    <p>Cena: {cuttingItem.totalPrice} RSD</p>
-                  </div>
-                  <div className={classes.cartItemActions}>
-                    <button className={classes.removeButton} onClick={() => removeCuttingListItem(cuttingItem.productId)}>
-                      Ukloni
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-    
-          <div>
-            <h3 style={{ textAlign: 'right', fontWeight: 'bold', marginTop: '20px', fontSize: '1.2rem' }}>
-              Ukupna cena: {totalPrice.toFixed(2)} RSD
-            </h3>
-            <div style={{ textAlign: 'center', marginTop: '20px' }}>
-              {(cartItems.length > 0 || cuttingCartItems.length > 0) && (
-                <button 
-                  style={{
-                    backgroundColor: '#5abb5f', 
-                    color: '#fff', 
-                    padding: '10px 20px', 
-                    fontSize: '1rem', 
-                    border: 'none', 
-                    borderRadius: '5px', 
-                    cursor: 'pointer'
-                  }}
-                  onClick={handleOrder}
-                >
-                  Poruči
+  return (
+    <div>
+      <h2>Vasa korpa</h2>
+
+      {/* Render regular cart items using CartItemList */}
+      <CartItemList cartItems={cartItems} removeItem={removeItem} />
+
+      {/* Render cutting cart items */}
+      {cuttingCartItems.length > 0 && (
+        <div className="cutting-cart-section">
+          <h3>Krojne liste</h3>
+          {cuttingCartItems.map((cuttingItem, index) => (
+            <div className={classes.cartItem} key={index}>
+              {/* Product Image */}
+              <img
+                src={cuttingItem.productImage}  // Assuming productImageUrl is stored in the cuttingCartItems
+                alt={cuttingItem.productName}
+                className={classes.cartItemImage}
+              />
+              <div className={classes.cartItemDetails}>
+                <h3>{cuttingItem.productName}</h3>
+                <ul>
+                  {cuttingItem.cuttingList.map((listItem, listIndex) => (
+                    <li key={listIndex}>
+                      {listItem.dimensions} - {listItem.amount} kom
+                    </li>
+                  ))}
+                </ul>
+                <p>Cena: {cuttingItem.totalPrice} RSD</p>
+              </div>
+              <div className={classes.cartItemActions}>
+                <button className={classes.removeButton} onClick={() => removeCuttingListItem(cuttingItem.productId)}>
+                  Ukloni
                 </button>
-              )}
+              </div>
             </div>
-          </div>
+          ))}
         </div>
-      );
-    }
+      )}
+
+      <div>
+        <h3 style={{ textAlign: 'right', fontWeight: 'bold', marginTop: '20px', fontSize: '1.2rem' }}>
+          Ukupna cena: {totalPrice.toFixed(2)} RSD
+        </h3>
+        <div style={{ textAlign: 'center', marginTop: '20px' }}>
+          {(cartItems.length > 0 || cuttingCartItems.length > 0) && (
+            <button 
+              style={{
+                backgroundColor: '#5abb5f', 
+                color: '#fff', 
+                padding: '10px 20px', 
+                fontSize: '1rem', 
+                border: 'none', 
+                borderRadius: '5px', 
+                cursor: 'pointer'
+              }}
+              onClick={handleOrder}
+            >
+              Poruči
+            </button>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default CartPage;
