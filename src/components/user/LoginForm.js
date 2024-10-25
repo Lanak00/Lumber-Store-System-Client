@@ -20,13 +20,13 @@ const LoginForm = ({ setIsLoggedIn }) => {
     setError(''); // Reset any previous errors
 
     try {
-      const response = await fetch('https://localhost:44364/api/auth/login', {
+      const response = await fetch('https://localhost:7046/api/User/login', { // Updated the URL to match the backend
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          username: username,
+          email: username, // Assuming the backend uses 'email' instead of 'username'
           password: password,
         }),
       });

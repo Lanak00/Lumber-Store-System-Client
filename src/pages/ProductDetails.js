@@ -14,7 +14,7 @@ function ProductDetailsPage() {
     const fetchProduct = async () => {
       try {
         setIsLoading(true); 
-        const response = await fetch(`https://localhost:44364/api/Product/${productId}`);
+        const response = await fetch(`https://localhost:7046/api/Product/${productId}`);
         
         if (!response.ok) {
           throw new Error('Failed to fetch product details.');

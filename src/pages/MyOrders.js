@@ -9,7 +9,7 @@ function MyOrdersPage() {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await fetch(`https://localhost:44364/api/Order/byClientId/${userId}`);
+        const response = await fetch(`https://localhost:7046/api/Order/byClientId/${userId}`);
         if (!response.ok) {
           throw new Error('Failed to fetch orders');
         }

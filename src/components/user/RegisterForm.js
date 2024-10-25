@@ -23,10 +23,10 @@ const RegisterForm = () => {
     });
   };
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
-
-    // Basic validation for required fields
+  
+    // Basic validation
     if (!formData.email || !formData.password || !formData.firstName || !formData.lastName) {
       setError('All fields are required.');
       return;
@@ -35,10 +35,34 @@ const RegisterForm = () => {
       setError('Passwords do not match.');
       return;
     }
-
-    setError('');
-    console.log('Registration submitted:', formData);
-    // Add logic for actual registration here
+  
+    try {
+      setError(''); // Clear previous errors
+  
+      // Replace this URL with your backend registration endpoint
+      const response = await fetch('https://localhost:7046/api/Client', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      if (!response.ok) {
+        const errorData = await response.json();
+        setError(errorData.message || 'Registration failed. Please try again.');
+        return;
+      }
+  
+      const result = await response.json();
+      console.log('Registration successful:', result);
+  
+      // Optional: Redirect to login page or show success message
+      alert('Registration successful! You can now log in.');
+    } catch (error) {
+      console.error('Error during registration:', error);
+      setError('Something went wrong. Please try again.');
+    }
   };
 
   return (

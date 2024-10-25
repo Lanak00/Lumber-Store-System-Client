@@ -15,7 +15,7 @@ function AllProductsPage() {
     useEffect(() => {
       setIsLoading(true);
   
-      fetch('https://localhost:44364/api/Product')
+      fetch('https://localhost:7046/api/Product')
         .then((response) => {
           if (!response.ok) {
             throw new Error('Failed to fetch products');

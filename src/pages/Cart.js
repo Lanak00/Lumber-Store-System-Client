@@ -33,7 +33,7 @@ function CartPage() {
     };
   
     try {
-      const response = await fetch('https://localhost:44364/api/Order', {
+      const response = await fetch('https://localhost:7046/api/Order', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
