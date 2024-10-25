@@ -59,9 +59,37 @@ function ProductDetailsPage() {
 
      alert(`Added ${amount} of ${name} to cart!`);
   }
+  const handleAddCuttingListToCart = (cuttingList, numberOfBoards, totalPrice) => {
+    const cuttingCartItems = JSON.parse(localStorage.getItem('cuttingCartItems')) || [];
+
+    // Assuming productId and product.name are available in the context
+    const cuttingListItem = {
+      productId: productId, // Pass the correct productId dynamically
+      productName: product.name, // Add the product name
+      productImage: product.image,
+      cuttingList: cuttingList.map(item => ({
+        dimensions: `${item.width}x${item.height}`,
+        amount: item.amount
+      })),
+      totalPrice: totalPrice // Calculate total price for cutting list
+    };
+  
+    // Push the custom cuttingListItem object into the cart
+    cuttingCartItems.push(cuttingListItem);
+  
+    // Save back to localStorage
+    localStorage.setItem('cuttingCartItems', JSON.stringify(cuttingCartItems));
+  
+    alert('Cutting list added to cart!');
+  };
+
   const handleShowCuttingList = () => {
     setShowCuttingList(true); // Show the cutting list component
-  }
+  };
+
+  const hideCuttingList = () => {
+    setShowCuttingList(false); // Hide the cutting list UI
+  };
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -92,7 +120,10 @@ function ProductDetailsPage() {
       onAddToCart={handleAddToCart}
       onShowCuttingList={handleShowCuttingList}
     />
-    {showCuttingList && <CuttingList />}
+    {showCuttingList && <CuttingList
+    hideCuttingList={hideCuttingList} // Pass the function to hide the cutting list
+    handleAddCuttingListToCart={handleAddCuttingListToCart}
+    productPrice={product.price}/>}
     </div>
   );
 }

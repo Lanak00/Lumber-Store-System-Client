@@ -139,4 +139,55 @@
   .addToCartFromCuttingListButton:hover {
     background-color: #795548;
   }
+
+  /* Total Price */
+.totalPriceContainer {
+    display: flex;
+    justify-content: space-between; /* This aligns the items left and right */
+    padding: 10px 0; /* Optional: Add some spacing */
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    text-align: right;
+  }
+  
+  /* Buttons Container */
+  .buttonsContainer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  
+  /* Cancel Button */
+  .cancelButton {
+    background-color: #e57373;
+    color: white;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .cancelButton:hover {
+    background-color: #d32f2f;
+  }
+  
+  /* Add to Cart Button */
+  .addToCartButton {
+    background-color: #4CAF50;;
+    color: #fff;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .addToCartButton:hover {
+    background-color: #3a843c;;
+  }
   
