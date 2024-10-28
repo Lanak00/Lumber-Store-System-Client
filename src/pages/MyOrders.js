@@ -1,18 +1,35 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'; // Import Link from React Router
+import OrderItem from '../components/orders/OrderItem'; 
+import styles from '../components/orders/MyOrdersPage.module.css'; 
 
 function MyOrdersPage() {
   const [orders, setOrders] = useState([]);
   const [filteredOrders, setFilteredOrders] = useState([]);
-  const [activeTab, setActiveTab] = useState('active'); 
-  const userId = getUserIdFromToken(localStorage.getItem('token')); 
+  const [activeTab, setActiveTab] = useState('active');
+  
+  const token = localStorage.getItem('token'); 
+  const userRole = getUserRoleFromToken(token); 
+  const userId = getUserIdFromToken(token); 
+
+  const apiUrl =
+    userRole === 'Client'
+      ? `https://localhost:7046/api/Order/byClientId/${userId}` 
+      : `https://localhost:7046/api/Order`; 
 
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await fetch(`https://localhost:7046/api/Order/byClientId/${userId}`);
+        const response = await fetch(apiUrl, {
+          headers: {
+            Authorization: `Bearer ${token}` 
+          }
+        });
+
         if (!response.ok) {
           throw new Error('Failed to fetch orders');
         }
+
         const data = await response.json();
         setOrders(data);
         setFilteredOrders(data.filter(order => order.status === 0)); 
@@ -22,52 +39,54 @@ function MyOrdersPage() {
     };
 
     fetchOrders();
-  }, [userId]);
+  }, [apiUrl, token]);
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
-    setFilteredOrders(orders.filter(order => (tab === 'active' ? order.status === 0 : order.status === 1)));
+    setFilteredOrders(
+      orders.filter(order => (tab === 'active' ? order.status === 0 : order.status === 1))
+    );
   };
 
   return (
-    <div>
-      <div style={{ textAlign: 'center', margin: '20px 0' }}>
+    <div className={styles.ordersPage}>
+      <div className={styles.tabs}>
         <span
           onClick={() => handleTabChange('active')}
-          style={{
-            cursor: 'pointer',
-            fontWeight: activeTab === 'active' ? 'bold' : 'normal',
-            fontSize: activeTab === 'active' ? '1.2rem' : '1rem',
-            marginRight: '20px'
-          }}
+          className={`${styles.tab} ${activeTab === 'active' ? styles.active : ''}`}
         >
           Active
         </span>
         <span
           onClick={() => handleTabChange('history')}
-          style={{
-            cursor: 'pointer',
-            fontWeight: activeTab === 'history' ? 'bold' : 'normal',
-            fontSize: activeTab === 'history' ? '1.2rem' : '1rem'
-          }}
+          className={`${styles.tab} ${activeTab === 'history' ? styles.active : ''}`}
         >
           History
         </span>
       </div>
 
-      <ul>
+      <div className={styles.ordersContainer}>
         {filteredOrders.map(order => (
-          <li key={order.id} style={{ marginBottom: '15px', listStyle: 'none', padding: '10px', borderBottom: '1px solid #ccc' }}>
-            <p>Order ID: {order.id}</p>
-            <p>Date: {new Date(order.date).toLocaleDateString()}</p>
-            <p>Status: {order.status === 0 ? 'Active' : 'Completed'}</p>
-          </li>
+          <Link 
+            to={`/order/${order.id}`} 
+            key={order.id} 
+            className={styles.orderLink}
+          >
+            <OrderItem order={order} />
+          </Link>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
 
+// Helper function to extract the user role from the JWT token
+const getUserRoleFromToken = (token) => {
+  const tokenPayload = JSON.parse(atob(token.split('.')[1]));
+  return tokenPayload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+};
+
+// Helper function to extract the user ID from the JWT token
 const getUserIdFromToken = (token) => {
   const tokenPayload = JSON.parse(atob(token.split('.')[1]));
   return tokenPayload.userId;

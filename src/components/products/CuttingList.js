@@ -18,7 +18,7 @@ function CuttingList({ hideCuttingList, handleAddCuttingListToCart, productPrice
   // Function to call API and calculate number of boards
   const calculateBoards = async (cuttingList) => {
     try {
-      const response = await fetch('https://localhost:44364/api/Cutting/calculate-boards', {
+      const response = await fetch('https://localhost:7046/api/Cutting/calculate-boards', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

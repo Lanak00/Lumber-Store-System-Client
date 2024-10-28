@@ -1,0 +1,56 @@
+.orderContainer {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .productList ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .productItem,
+  .cuttingListItem {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-bottom: 15px;
+    padding: 8px; /* Reduced padding */
+    background-color: #f9f9f9;
+    border-radius: 8px;
+  }
+  
+  .productImage,
+  .cuttingListImage {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    margin-right: 10px; /* Adjust spacing */
+    border-radius: 8px;
+    border: 1px solid #ddd;
+  }
+  
+  .productItem div,
+  .cuttingListItem div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Ensure left alignment */
+  }
+  
+  .productItem p,
+  .cuttingListItem p {
+    margin: 2px 0; /* Reduce spacing between lines */
+  }
+  
+  .cuttingList {
+    margin-top: 20px;
+  }
+  
+  .cuttingList ul {
+    padding-left: 0;
+    margin-top: 5px;
+  }
+  
