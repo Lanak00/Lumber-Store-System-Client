@@ -1,17 +1,32 @@
-import { Link, useNavigate} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import classes from './MainNavigation.module.css';
 import logo from '../../assets/logo/logo_image.png';
 import { FaShoppingCart } from 'react-icons/fa';
 
 function MainNavigation({ isLoggedIn, setIsLoggedIn }) {
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem('token'); 
-    setIsLoggedIn(false); // Update state on logout
-    navigate("/");
+    localStorage.removeItem('token');
+    setIsLoggedIn(false);
+    navigate('/');
   };
 
+  const getUserRoleFromToken = () => {
+    const token = localStorage.getItem('token');
+    if (!token) return null;
+
+    try {
+      const tokenPayload = JSON.parse(atob(token.split('.')[1]));
+      return tokenPayload['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+    } catch (error) {
+      console.error('Error decoding token:', error);
+      return null;
+    }
+  };
+
+  const userRole = getUserRoleFromToken();
+  console.log(userRole)
   return (
     <header className={classes.header}>
       <div className={classes.logo}>
@@ -23,25 +38,34 @@ const navigate = useNavigate();
           <li>
             <Link to="/">Proizvodi</Link>
           </li>
-          {isLoggedIn ? (
+          {isLoggedIn && userRole === 'Client' && (
             <>
               <li>
                 <Link to="/orders">Moje porudzbine</Link>
               </li>
               <li>
                 <Link to="/cart">
-                  <FaShoppingCart size={24} /> 
+                  <FaShoppingCart size={23} />
                 </Link>
               </li>
-              <li>
-                <button onClick={handleLogout} className={classes.actionButton}>
-                  Odjavi se
-                </button>
-              </li>
             </>
+          )}
+          {isLoggedIn && userRole === 'Employee' && (
+            <li>
+              <Link to="/orders">Porudzbine</Link>
+            </li>
+          )}
+          {isLoggedIn ? (
+            <li>
+              <button onClick={handleLogout} className={classes.actionButton}>
+                Odjavi se
+              </button>
+            </li>
           ) : (
             <li>
-              <Link to="/login" className={classes.actionButton}>Prijavi se</Link> 
+              <Link to="/login" className={classes.actionButton}>
+                Prijavi se
+              </Link>
             </li>
           )}
         </ul>

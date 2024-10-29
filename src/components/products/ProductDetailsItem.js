@@ -1,91 +1,100 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import classes from './ProductDetailsItem.module.css';
 
-function ProductDetailsItem({ image, name, type, manufacturer, description, price, dimensions, priceUnit, onAddToCart, onShowCuttingList  }) {
-  const [amount, setAmount] = useState(1);
+function ProductDetailsItem({ 
+  image, name, type, manufacturer, description, 
+  price, dimensions, priceUnit, onAddToCart, onShowCuttingList 
+}) {
+  const [amount, setAmount] = useState(''); // Initialize as an empty string
+  const [userRole, setUserRole] = useState(null);
 
-  const increaseAmount = () => setAmount((prevAmount) => prevAmount + 1);
-  const decreaseAmount = () => setAmount((prevAmount) => (prevAmount > 1 ? prevAmount - 1 : 1));
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const tokenPayload = JSON.parse(atob(token.split('.')[1])); // Decode the token
+      setUserRole(tokenPayload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]);
+    }
+  }, []);
+
+  const increaseAmount = () => setAmount((prevAmount) => (prevAmount ? parseFloat(prevAmount) + 1 : 1));
+  const decreaseAmount = () => setAmount((prevAmount) => (prevAmount > 1 ? parseFloat(prevAmount) - 1 : 1));
+
   const handleAmountChange = (e) => {
     const value = e.target.value;
-    if (categoryName === 'Drvo') {
-      // Validate input to ensure it's not zero or negative
-      if (value === '' || parseFloat(value) <= 0) {
-        setAmount('1'); // Reset to 1 if value is zero or negative
-      } else {
-        setAmount(value);
-      }
+
+    // Allow empty input, but validate only when it's not empty
+    if (value === '' || parseFloat(value) >= 0) {
+      setAmount(value); // Update the state to allow user input
     }
   };
 
-// Function to map the type to the appropriate product category
-const getCategoryName = (type) => {
-  switch (type) {
-    case 0:
-      return 'Plocasti materijali'; 
-    case 1:
-      return 'Drvo';  
-    default:
-      return 'Unknown'; 
-  }
-};
+  const getCategoryName = (type) => {
+    switch (type) {
+      case 0:
+        return 'Plocasti materijali';
+      case 1:
+        return 'Drvo';
+      default:
+        return 'Unknown';
+    }
+  };
 
-// Get the mapped category name
-const categoryName = getCategoryName(type);
-
-// Determine the unit based on the category
-const unit = categoryName === 'Plocasti materijali' ? 'kom' : categoryName === 'Drvo' ? 'm³' : '';
+  const categoryName = getCategoryName(type);
+  const unit = categoryName === 'Plocasti materijali' ? 'kom' : categoryName === 'Drvo' ? 'm³' : '';
 
   return (
     <div className={classes.productDetails}>
-      {/* Left Column: Product Image */}
       <img src={image} alt={name} className={classes.productImage} />
-      
-      {/* Right Column: Product Details */}
+
       <div className={classes.productDetailsContent}>
         <h2 className={classes.productName}>{name}</h2>
         <p className={classes.productDescription}>{description}</p>
         <p className={classes.productType}>Tip: {categoryName}</p>
         <p className={classes.productManufacturer}>Proizvodjac: {manufacturer}</p>
-        {type === 0 && (
-          <p className={classes.productDimensions}>{dimensions}</p>
-        )}
+        {type === 0 && <p className={classes.productDimensions}>{dimensions}</p>}
         <p className={classes.productPrice}>{price.toFixed(2)} RSD / {unit}</p>
 
-        <div className={classes.actions}>
-          <div className={classes.amountControl}>
-            {categoryName === 'Plocasti materijali' ? (
-              // Input field with buttons for 'Plocasti materijali'
-              <>
-                <button onClick={decreaseAmount} className={classes.decreaseButton}>-</button>
-                <input type="text" value={amount} readOnly className={classes.amountInput} />
-                <button onClick={increaseAmount} className={classes.increaseButton}>+</button>
-              </>
-            ) : (
-              // Input field for 'Drvo' to enter cubic meters
-              <div className={classes.cubicMeterControl}>
-              <input
-                type="number"
-                min="1"
-                step="0.01"
-                value={amount}
-                onChange={handleAmountChange}
-                className={classes.amountInput}
-                inputMode="decimal"
-              />
-              <span className={classes.cubicMeterLabel}>m³</span>
+        {userRole === 'Client' && (
+          <div className={classes.actions}>
+            <div className={classes.amountControl}>
+              {categoryName === 'Plocasti materijali' ? (
+                <>
+                  <button onClick={decreaseAmount} className={classes.decreaseButton}>-</button>
+                  <input
+                    type="text"
+                    value={amount}
+                    onChange={handleAmountChange}
+                    className={classes.amountInput}
+                  />
+                  <button onClick={increaseAmount} className={classes.increaseButton}>+</button>
+                </>
+              ) : (
+                <div className={classes.cubicMeterControl}>
+                  <input
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    value={amount}
+                    onChange={handleAmountChange}
+                    className={classes.amountInput}
+                    inputMode="decimal"
+                  />
+                  <span className={classes.cubicMeterLabel}>m³</span>
+                </div>
+              )}
             </div>
+
+            <button onClick={() => onAddToCart(name, amount)} className={classes.addToCartButton}>
+              Dodaj u korpu
+            </button>
+
+            {type === 0 && (
+              <button onClick={onShowCuttingList} className={classes.addCuttingListButton}>
+                Napravi krojnu listu
+              </button>
             )}
           </div>
-          <button onClick={() => onAddToCart(name, amount)} className={classes.addToCartButton}>
-            Dodaj u korpu
-          </button>
-          {type === 0 && (
-          <button onClick={onShowCuttingList} className={classes.addCuttingListButton}>
-            Napravi krojnu listu
-          </button>
-          )}
-        </div>
+        )}
       </div>
     </div>
   );

@@ -22,7 +22,8 @@ function MyOrdersPage() {
       try {
         const response = await fetch(apiUrl, {
           headers: {
-            Authorization: `Bearer ${token}` 
+            'Content-Type': 'application/json',
+             Authorization: `Bearer ${token}`,
           }
         });
 

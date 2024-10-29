@@ -3,6 +3,8 @@ import classes from './CartItem.module.css';
 
 function CartItem({ item, removeItem }) {
     const dimensionsText = `${item.dimensions.length}x${item.dimensions.width}x${item.dimensions.height}`;
+    const unit = item.category === 'Drvo' ? 'm³' : 'kom';
+    console.log(item);
     
     return (
         <li className={classes.cartItem}>
@@ -12,7 +14,7 @@ function CartItem({ item, removeItem }) {
                 <p>Proizvodjac: {item.manufacturer}</p>
                 <p>Dimenzije: {dimensionsText}</p>
                 <p>Cena: {item.price.toFixed(2)} RSD</p>
-                <p>Kolicina: {item.amount}</p>
+                <p>Kolicina: {item.amount} {unit}</p>
             </div>
             <div className={classes.cartItemActions}>
                 <button onClick={() => removeItem(item.id)} className={classes.removeButton}>
