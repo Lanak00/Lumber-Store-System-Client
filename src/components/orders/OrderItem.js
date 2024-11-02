@@ -13,7 +13,6 @@ function OrderItem({ order }) {
     }
   }, []);
 
-
   useEffect(() => {
     const fetchClientName = async () => {
       try {
@@ -44,7 +43,6 @@ function OrderItem({ order }) {
     <div className={styles.orderItem}>
       <p><strong>Datum:</strong> {new Date(order.date).toLocaleDateString()}</p>
       <p><strong>Cena:</strong> {order.totalPrice} RSD</p>
-
       
       {userRole === 'Employee' && clientName && (
         <p><strong>Klijent:</strong> {clientName}</p>

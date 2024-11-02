@@ -1,11 +1,12 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import classes from './CuttingList.module.css';
 
 function CuttingList({ hideCuttingList, handleAddCuttingListToCart, productPrice }) {
   const [cuttingList, setCuttingList] = useState([]);
   const [currentEntry, setCurrentEntry] = useState({ width: '', height: '', amount: '' });
-  const [numberOfBoards, setNumberOfBoards] = useState(0); 
-  const [totalPrice, setTotalPrice] = useState(0); 
+  const [numberOfBoards, setNumberOfBoards] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [isLoading, setIsLoading] = useState(false); // New loading state
 
   const isFormValid = currentEntry.width && currentEntry.height && currentEntry.amount;
 
@@ -17,15 +18,16 @@ function CuttingList({ hideCuttingList, handleAddCuttingListToCart, productPrice
 
   // Function to call API and calculate number of boards
   const calculateBoards = async (cuttingList) => {
+    setIsLoading(true); // Show loader
     try {
-      const response = await fetch('https://localhost:7046/api/Cutting/calculate-boards', {
+      const response = await fetch('https://localhost:7046/api/Cutting/CalculateBoards', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          boardWidth: 200, 
-          boardHeight: 100, 
+          boardWidth: 200,
+          boardHeight: 100,
           cuttingList: cuttingList.map(item => ({
             width: parseInt(item.width, 10),
             length: parseInt(item.height, 10),
@@ -49,6 +51,8 @@ function CuttingList({ hideCuttingList, handleAddCuttingListToCart, productPrice
       console.error('Error calculating boards:', error);
       setNumberOfBoards(0);
       setTotalPrice(0);
+    } finally {
+      setIsLoading(false); // Hide loader
     }
   };
 
@@ -69,13 +73,13 @@ function CuttingList({ hideCuttingList, handleAddCuttingListToCart, productPrice
   const clearCuttingList = () => {
     setCuttingList([]);
     localStorage.removeItem('cuttingList');
-    hideCuttingList(); 
+    hideCuttingList();
   };
 
   // Handle adding the cutting list to the cart
   const handleAddToCart = () => {
-    handleAddCuttingListToCart(cuttingList, numberOfBoards, totalPrice); 
-    clearCuttingList(); 
+    handleAddCuttingListToCart(cuttingList, numberOfBoards, totalPrice);
+    clearCuttingList();
   };
 
   return (
@@ -105,10 +109,10 @@ function CuttingList({ hideCuttingList, handleAddCuttingListToCart, productPrice
           onChange={handleInputChange}
           className={classes.cuttingListInput}
         />
-        <button 
-          onClick={addCuttingListItem} 
+        <button
+          onClick={addCuttingListItem}
           className={classes.addCuttingListItemButton}
-          disabled={!isFormValid} 
+          disabled={!isFormValid || isLoading} // Disable button while loading
         >
           +
         </button>
@@ -137,8 +141,8 @@ function CuttingList({ hideCuttingList, handleAddCuttingListToCart, productPrice
 
       {cuttingList.length > 0 && (
         <div className={classes.totalPriceContainer}>
-          <span>Broj ploca: {numberOfBoards} </span>
-          <span>Cena: {totalPrice.toLocaleString()} RSD</span> 
+          <span>Broj ploca: {isLoading ? 'Loading...' : numberOfBoards}</span> {/* Loader here */}
+          <span>Cena: {totalPrice.toLocaleString()} RSD</span>
         </div>
       )}
 
