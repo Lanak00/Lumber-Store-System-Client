@@ -17,6 +17,7 @@ function AllProductsPage() {
     const [isFormOpen, setIsFormOpen] = useState(false);
 
     const token = localStorage.getItem('token');
+    const userRole = getUserRoleFromToken(token);
 
 
     useEffect(() => {
@@ -114,7 +115,7 @@ function AllProductsPage() {
 
         <ProductList products={filteredProducts} />
 
-        {isEmployee && (
+        {(isEmployee || userRole === 'Administrator') && (
           <button 
             className={styles.addProductButton} 
             onClick={handleAddProductClick}

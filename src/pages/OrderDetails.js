@@ -174,7 +174,7 @@ function OrderDetailsPage() {
         </div>
       )}
 
-      {userRole === 'Employee' && order.status === 0 && (
+      {(userRole === 'Employee' || userRole === 'Administrator') && order.status === 0 && (
         <div className={styles.buttonContainer}>
           <button
             className={styles.finishButton}

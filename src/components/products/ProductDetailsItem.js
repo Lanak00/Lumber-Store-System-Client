@@ -19,8 +19,9 @@ function ProductDetailsItem({ image, name, type, manufacturer, description, pric
     if (token) {
       const tokenPayload = JSON.parse(atob(token.split('.')[1]));
       setUserRole(tokenPayload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]);
+      console.log(userRole)
     }
-  }, []);
+  }, [userRole]);
 
   const increaseAmount = () => setAmount((prevAmount) => prevAmount + 1);
   const decreaseAmount = () => setAmount((prevAmount) => (prevAmount > 1 ? prevAmount - 1 : 1));
@@ -121,7 +122,7 @@ function ProductDetailsItem({ image, name, type, manufacturer, description, pric
           </div>
         )}
 
-        {userRole === 'Employee' && (
+        {(userRole === 'Employee' || userRole === 'Administrator') && (
           <div className={classes.buttonGroup}>
             <button onClick={handleDeleteProduct} className={classes.deleteButton}>Obrisi</button>
             <button onClick={openEditForm} className={classes.editButton}>Izmeni</button>

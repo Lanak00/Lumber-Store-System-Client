@@ -50,7 +50,7 @@ function MainNavigation({ isLoggedIn, setIsLoggedIn }) {
               </li>
             </>
           )}
-          {isLoggedIn && userRole === 'Employee' && (
+          {isLoggedIn && (userRole === 'Employee' || userRole === 'Administrator') && (
             <li>
               <Link to="/orders">Porudzbine</Link>
             </li>
