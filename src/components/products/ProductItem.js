@@ -8,6 +8,7 @@ function ProductItem(props) {
   const dimensionsText = props.dimensions
     ? `${props.dimensions.width}x${props.dimensions.length}`
     : '';
+  console.log()
 
   // Determine whether to show dimensions based on the category
   const shouldShowDimensions = props.type !== 1; 

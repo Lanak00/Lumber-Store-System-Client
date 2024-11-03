@@ -136,7 +136,7 @@ const RegisterForm = () => {
         <div className={classes.formGroup}>
           <label htmlFor="email">Email</label>
           <input
-            type="email"
+            type="text"
             id="email"
             name="email"
             value={formData.email}
@@ -168,7 +168,7 @@ const RegisterForm = () => {
             required
           />
           {!passwordsMatch && (
-            <p className={classes.error}>Passwords do not match.</p>
+            <p className={classes.error}>Lozinke se ne poklapaju.</p>
           )}
         </div>
 

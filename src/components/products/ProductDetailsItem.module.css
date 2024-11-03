@@ -1,30 +1,31 @@
 /* General Styling */
 .productDetails {
-  display: flex; /* Create a two-column layout */
-  gap: 2rem; /* Space between the columns */
+  display: flex;
+  gap: 2rem;
   max-width: 800px;
   margin: 2rem auto;
   padding: 1.5rem;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
-  background-color: #fff; /* Light background for contrast */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
-  font-family: 'Lato', sans-serif; /* Use a modern sans-serif font */
-  color: #333; /* Dark gray text color */
+  background-color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  font-family: 'Lato', sans-serif;
+  color: #333;
 }
 
 /* Left Column - Image */
 .productImage {
-  width: 200px; /* Set a fixed width for the image */
+  width: 200px;
   height: auto;
   border-radius: 8px;
-  object-fit: cover; /* Ensures image maintains aspect ratio */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Soft shadow around the image */
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Right Column - Product Details */
 .productDetailsContent {
-  flex: 1; /* Allow the right column to take up remaining space */
+  flex: 1;
+  text-align: left; /* Ensures left alignment of all content within this div */
 }
 
 /* Product Name */
@@ -32,7 +33,8 @@
   font-size: 1.8rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
-  color: #4E342E; /* Darker brown for a woody feel */
+  color: #4E342E;
+  text-align: left; /* Ensures the text is aligned left */
 }
 
 /* Product Info Styling */
@@ -44,114 +46,147 @@
 .productPriceUnit {
   font-size: 1rem;
   margin: 0.5rem 0;
-  color: #555; /* Lighter gray for secondary text */
+  color: #555;
 }
 
 /* Emphasize Price */
 .productPrice {
   font-weight: bold;
-  color: #6D4C41; /* Medium brown for price */
+  color: #6D4C41;
 }
 
 /* Actions Container */
 .actions {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   margin-top: 1.5rem;
-  gap: 1rem; /* Space between controls */
+  gap: 0.5rem;
 }
 
 /* Amount Control Styling */
 .amountControl {
   display: flex;
+  max-width: 100px;
   align-items: center;
   border: 1px solid #ddd;
   border-radius: 5px;
-  overflow: hidden; /* Ensures buttons and input align properly */
-  background-color: #f7f7f7; /* Light background for the control */
+  background-color: #f7f7f7;
+  overflow: hidden;
+  height: 36px; /* Ensure consistent height */
 }
-
-
 /* Amount Input Field */
 .amountInput {
-  width: 3rem;
+  width: 2.5rem;
   text-align: center;
   border: none;
   font-size: 1rem;
-  padding: 0.5rem;
+  padding: 0.4rem 0.4rem;
   background-color: #fff;
   color: #333;
   outline: none;
-  appearance: none; /* Removes default styling, including arrows */
-  -moz-appearance: textfield; /* Firefox specific */
+  appearance: none;
+  display: flex;
+  vertical-align: center;
+  justify-content: center;
+  height: 36px; /* Match height to ensure alignment */
 }
 
-/* Remove the number input arrows */
 .amountInput::-webkit-outer-spin-button,
 .amountInput::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-/* Cubic Meter Control Styling */
-.cubicMeterControl {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem; /* Space between input and label */
-}
-
-/* Cubic Meter Label */
-.cubicMeterLabel {
-  font-size: 1rem;
-  color: #555; /* Slightly lighter color to indicate secondary information */
-  margin-right: 0.5rem;
-}
-
-
-/* Button Styling for Increase/Decrease */
+/* Decrease and Increase Button Styling */
 .decreaseButton,
 .increaseButton {
   background-color: #fff;
-  border: 1px solid #ddd;
-  padding: 0.5rem 0.7rem;
+  border: none;
+  padding: 0.5rem;
   cursor: pointer;
   font-size: 1rem;
-  transition: background-color 0.3s, border-color 0.3s;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+  height: 36px; /* Match the height of the input field */
 }
 
 .decreaseButton:hover,
 .increaseButton:hover {
-  background-color: #f0f0f0; /* Subtle hover effect */
-  border-color: #bbb; /* Darker border on hover */
+  background-color: #f0f0f0;
 }
 
 /* Add to Cart Button */
 .addToCartButton {
-  background-color: #8D6E63; /* Warm brown for woody feel */
+  background-color: #8D6E63;
   color: #fff;
   border: none;
-  padding: 0.7rem 1.5rem;
+  padding: 0.6rem 1rem;
   border-radius: 5px;
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s;
-}
-
-.addCuttingListButton {
-  background-color: #4CAF50; /* Warm brown for woody feel */
-  color: #fff;
-  border: none;
-  padding: 0.7rem 1.5rem;
-  border-radius: 5px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s;
+  height: 36px; /* Match height */
 }
 
 .addToCartButton:hover {
-  background-color: #795548; /* Darker brown on hover */
+  background-color: #795548;
+}
+
+/* Cutting List Button */
+.addCuttingListButton {
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  height: 36px; /* Match height */
 }
 
 .addCuttingListButton:hover {
   background-color: #337335;
 }
+
+.buttonGroup {
+  display: flex;
+  gap: 10px; /* Adds space between buttons */
+}
+
+.deleteButton {
+  background-color: #c94743;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  height: 36px; /* Match height */
+}
+
+.editButton {
+  background-color: #513a1f;
+  color: #fff;
+  border: 1px;
+  padding: 0.6rem 1rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  height: 36px; /* Match height */
+}
+
+.deleteButton:hover {
+  background-color: #c9302c;
+}
+
+.editButton:hover {
+  background-color: #382816;
+}
+

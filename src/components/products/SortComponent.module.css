@@ -1,5 +1,6 @@
 /* Sorting Component Styles */
 .sortContainer {
+    width: 400px;
     display: flex;
     align-items: center; /* Center items vertically */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -9,12 +10,14 @@
   }
   
   .sortSelect {
+    max-width: fit-content;
     background-color: #ffffff; /* White background for a clean look */
     border: 1px solid #ddd; /* Light border */
     border-radius: 6px; /* Rounded corners for a modern look */
-    padding: 6px 10px; /* Padding inside the dropdown */
+    padding: 6px 6px; /* Padding inside the dropdown */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Consistent font */
     font-size: 13px; /* Slightly smaller font size */
+    min-height: 40px;
     color: #333; /* Text color */
     cursor: pointer; /* Pointer cursor for better UX */
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */

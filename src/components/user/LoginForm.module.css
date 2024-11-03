@@ -1,95 +1,121 @@
+/* General Container */
 .loginContainer {
-    max-width: 400px;
-    margin: 50px auto;
-    padding: 30px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Slightly stronger shadow */
-    background-color: #fff;
-    font-family: 'Lato', sans-serif;
-  }
-  
-  .loginForm {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  /* Styling for the form heading */
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 30px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  font-family: 'Lato', sans-serif;
+}
+
+/* Form Styling */
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
 .loginForm h2 {
-    margin-bottom: 30px;
-    color: #333;
-    font-size: 1.6rem;
-    font-weight: 700; /* Bold font for emphasis */
-    text-align: center;
-  }
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-align: center;
+}
 
-  .formGroup {
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .error {
-    color: red;
-    margin-bottom: 10px;
-    font-size: 0.9rem;
-  }
-  
-  label {
-    margin-bottom: 5px;
-    font-weight: 600;
-    color: #333; /* Slightly darker text for contrast */
-    font-size: 1rem;
-  }
-  
-  input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-    transition: border-color 0.3s;
-  }
-  
-  input:focus {
-    border-color: #4CAF50; /* Focus effect with green border */
-    outline: none; /* Remove default outline */
-  }
-  
-  .loginButton {
-    padding: 12px;
-    background-color: #5abb5f;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
-  }
-  
-  .loginButton:hover {
-    background-color: #4b9c50; /* Darker green on hover */
-  }
-  
-  .loginButton:active {
-    transform: scale(0.98); /* Slightly shrink the button when clicked */
-  }
+/* Form Group Styling */
+.formGroup {
+  margin-bottom: 20px;
+}
 
-  /* Registration Prompt */
+.formGroup label {
+  font-weight: 600;
+  color: #333;
+  font-size: 1rem;
+  margin-bottom: 5px;
+  display: inline-block; /* Ensures label stays above input */
+}
+
+/* Input Fields Styling (text and password) */
+.formGroup input[type="text"],
+.formGroup input[type="password"] {
+  width: 100%;
+  height: 40px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+  box-sizing: border-box; /* Ensures padding is included in height */
+}
+
+/* Input Fields Styling (text and password) */
+.formGroup input[type="password"] {
+  width: 100%;
+  height: 32px; /* Set a consistent height for all inputs */
+  padding: 8px; /* Add consistent padding */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+  box-sizing: border-box; /* Ensures padding does not affect height */
+  line-height: normal; /* Reset line height if needed */
+  appearance: none; /* Ensure consistent rendering across browsers */
+}
+
+.formGroup input[type="text"]:focus,
+.formGroup input[type="password"]:focus {
+  border-color: #4CAF50;
+  outline: none;
+}
+
+
+/* Error Message Styling */
+.error {
+  color: red;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* Login Button Styling */
+.loginButton {
+  width: 100%;
+  height: 40px;
+  background-color: #5abb5f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.loginButton:hover {
+  background-color: #4b9c50;
+}
+
+.loginButton:active {
+  transform: scale(0.98);
+}
+
+/* Register Prompt Styling */
 .registerPrompt {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 0.9rem;
-    color: #333;
-  }
-  
-  .registerLink {
-    color: #4CAF50; /* Green color to match the login button */
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s;
-  }
-  
-  .registerLink:hover {
-    color: #45a049; /* Darker green on hover, matching login button hover */
-  }
-  
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.registerLink {
+  color: #4CAF50;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.registerLink:hover {
+  color: #45a049;
+}

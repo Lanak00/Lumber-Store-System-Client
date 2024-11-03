@@ -26,8 +26,8 @@ function CuttingList({ hideCuttingList, handleAddCuttingListToCart, productPrice
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          boardWidth: 200,
-          boardHeight: 100,
+          boardWidth: 275,
+          boardHeight: 208,
           cuttingList: cuttingList.map(item => ({
             width: parseInt(item.width, 10),
             length: parseInt(item.height, 10),
