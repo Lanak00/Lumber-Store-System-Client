@@ -1,24 +1,24 @@
 .addProductButton {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 60px; /* Increased width */
-    height: 60px; /* Increased height */
-    background-color: #28a745; /* Green color */
-    color: white;
-    border: none;
-    border-radius: 50%;
-    font-size: 28px; /* Slightly larger font size */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    z-index: 1000; /* Ensures it stays on top of other elements */
-    transition: transform 0.3s, background-color 0.3s;
-  }
-  
-  .addProductButton:hover {
-    background-color: #218838; /* Darker green on hover */
-    transform: scale(1.1); /* Slightly increase size on hover */
-  }
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1050; /* Slightly increased to avoid modal conflicts */
+  transition: transform 0.3s, background-color 0.3s;
+}
+
+.addProductButton:hover {
+  background-color: #218838;
+  transform: scale(1.05); /* Reduced hover scale to prevent misalignment */
+}

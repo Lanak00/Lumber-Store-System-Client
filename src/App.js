@@ -9,6 +9,7 @@ import RegisterPage from './pages/Register';
 import CartPage from './pages/Cart';
 import MyOrdersPage from './pages/MyOrders';
 import OrderDetailsPage from './pages/OrderDetails';
+import UsersPage from './pages/Users';
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
         <Route path="/cart" element={<CartPage />} /> 
         <Route path="/orders" element={<MyOrdersPage />} />
         <Route path="/order/:id" element={<OrderDetailsPage />} />
+        <Route path="/users" element={<UsersPage/>}/>
       </Routes>
     </Layout>
   );
