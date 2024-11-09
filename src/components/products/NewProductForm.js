@@ -208,13 +208,15 @@ const NewProductForm = ({ onClose, isEdit = false, existingProduct = null }) => 
         <div className={styles.scrollableContent}>
           <form onSubmit={handleSubmit}>
             
-            <div className={styles.formGroup}>
-                <label>Fotografija:</label>
-                <div className={styles.imageUploadContainer}>
-                    <input type="file" accept="image/*" onChange={handleImageChange} />
-                        {isEdit && imageUrl && <img src={imageUrl} alt="Current Product" className={styles.tinyImage} />}
-                </div>
+          <div className={styles.formGroup}>
+            <div className={styles.imageUploadContainer}>
+              <label>Fotografija:</label>
+              <input type="file" accept="image/*" onChange={handleImageChange} />
+              {isEdit && imageUrl && (
+                <img src={imageUrl} alt="Current Product" className={styles.tinyImage} />
+              )}
             </div>
+          </div>
 
             {!isEdit && (
               <label>Sifra proizvoda:
@@ -230,7 +232,7 @@ const NewProductForm = ({ onClose, isEdit = false, existingProduct = null }) => 
               <input type="text" name="manufacturer" value={formData.manufacturer} onChange={handleInputChange} required />
             </label>
 
-            <label>Cena po jedinici mere (RSD):
+            <label> Cena po jedinici mere (RSD):
               <input type="number" name="price" value={formData.price} onChange={handleInputChange} required />
             </label>
 

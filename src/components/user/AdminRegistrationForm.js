@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import styles from './AdminRegistrationForm.module.css';
+import React, { useState, useEffect } from 'react';
+import styles from '../products/NewProductForm.module.css'; // Import styles from NewProductForm.module.css
 
-function AdminRegistrationForm({ onClose }) {
+function AdminRegistrationForm({ onClose, existingData, isEdit }) {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -13,13 +13,31 @@ function AdminRegistrationForm({ onClose }) {
     number: '',
     city: '',
     country: '',
-    role: 1, // Default to Employee
+    role: 0, 
   });
   const [error, setError] = useState('');
 
+  useEffect(() => {
+    if (isEdit && existingData) {
+      setFormData({
+        firstName: existingData.firstName || '',
+        lastName: existingData.lastName || '',
+        email: existingData.email || '',
+        password: '', 
+        dateOfBirth: existingData.dateOfBirth || '',
+        phoneNumber: existingData.phoneNumber || '',
+        street: existingData.address?.street || '',
+        number: existingData.address?.number || '',
+        city: existingData.address?.city || '',
+        country: existingData.address?.country || '',
+        role: existingData.role || 1,
+      });
+    }
+  }, [isEdit, existingData]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: name === 'role' ? Number(value) : value }));
+    setFormData((prev) => ({ ...prev, [name]: name === 'role' ? Number(value) : value }));
   };
 
   const handleRegister = async (e) => {
@@ -65,7 +83,7 @@ function AdminRegistrationForm({ onClose }) {
       };
 
       const userResponse = await fetch('https://localhost:7046/api/User', {
-        method: 'POST',
+        method: isEdit ? 'PUT' : 'POST', // Use PUT for editing existing user, POST for new user
         headers: {
           'Content-Type': 'application/json',
         },
@@ -78,8 +96,8 @@ function AdminRegistrationForm({ onClose }) {
         return;
       }
 
-      alert('User added successfully!');
-      onClose(); // Close the form after successful registration
+      alert(isEdit ? 'Uspesno izmenjeni podaci o korisniku' : 'Uspesno registrovan novi korisnik');
+      onClose(); // Close the form after successful registration/update
     } catch (error) {
       console.error('Error during registration:', error);
       setError('Something went wrong. Please try again.');
@@ -89,46 +107,54 @@ function AdminRegistrationForm({ onClose }) {
   return (
     <div className={styles.overlay} onClick={onClose}>
       <div className={styles.formContainer} onClick={(e) => e.stopPropagation()}>
+        {/* Close button in the upper right corner */}
+        <button className={styles.closeButton} onClick={onClose}>
+          &times;
+        </button>
+
         <form onSubmit={handleRegister}>
-          <h2>Register New User</h2>
+          <h2>{isEdit ? 'Izmeni podatke o korisniku' : 'Registruj novog korisnika'}</h2>
           {error && <p className={styles.error}>{error}</p>}
-          <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} placeholder="First Name" required />
-          <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} placeholder="Last Name" required />
+          <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} placeholder="Ime" required />
+          <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} placeholder="Prezime" required />
           <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email" required />
-          <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Password" required />
+          {!isEdit && <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Lozinka" required />}
           <input type="date" name="dateOfBirth" value={formData.dateOfBirth} onChange={handleChange} required />
-          <input type="tel" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} placeholder="Phone Number" required />
+          <input type="tel" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} placeholder="Telefon" required />
 
-          <h3>Address</h3>
-          <input type="text" name="street" value={formData.street} onChange={handleChange} placeholder="Street" required />
-          <input type="text" name="number" value={formData.number} onChange={handleChange} placeholder="Number" required />
-          <input type="text" name="city" value={formData.city} onChange={handleChange} placeholder="City" required />
-          <input type="text" name="country" value={formData.country} onChange={handleChange} placeholder="Country" required />
+          <h3>Adresa</h3>
+          <input type="text" name="Ulica" value={formData.street} onChange={handleChange} placeholder="Street" required />
+          <input type="text" name="Broj" value={formData.number} onChange={handleChange} placeholder="Number" required />
+          <input type="text" name="Grad" value={formData.city} onChange={handleChange} placeholder="City" required />
+          <input type="text" name="Drzava" value={formData.country} onChange={handleChange} placeholder="Country" required />
 
-          <h3>Role</h3>
-          <label>
-            <input
-              type="radio"
-              name="role"
-              value={0}
-              checked={formData.role === 0}
-              onChange={handleChange}
-            />
-            Zaposleni
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="role"
-              value={2}
-              checked={formData.role === 2}
-              onChange={handleChange}
-            />
-            Administrator
-          </label>
+          {!isEdit && (
+            <>
+              <h3>Uloga</h3>
+              <label>
+                <input
+                  type="radio"
+                  name="role"
+                  value={0}
+                  checked={formData.role === 0}
+                  onChange={handleChange}
+                />
+                Zaposleni
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="role"
+                  value={2}
+                  checked={formData.role === 2}
+                  onChange={handleChange}
+                />
+                Administrator
+              </label>
+            </>
+          )}
 
-          <button type="submit">Registruj korisnika</button>
-          <button type="button" onClick={onClose}>Zatvori</button>
+          <button type="submit" className={styles.submitButton}>{isEdit ? 'Update User' : 'Registruj korisnika'}</button>
         </form>
       </div>
     </div>

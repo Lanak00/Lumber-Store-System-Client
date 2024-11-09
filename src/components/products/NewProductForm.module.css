@@ -1,127 +1,91 @@
 .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-  
-  .formContainer {
-    background-color: white;
-    border-radius: 8px;
-    padding: 20px;
-    width: 100%;
-    max-width: 500px;
-    max-height: 90vh;
-    overflow-y: auto;
-    position: relative;
-  }
-  
-  .scrollableContent {
-    max-height: 80vh;
-    overflow-y: auto;
-  }
-  
-  .closeButton {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-  }
-  
-  h2 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 8px;
-    font-size: 0.9rem;
-  }
-  
-  input[type="text"],
-  input[type="number"],
-  textarea,
-  select {
-    width: 90%;
-    padding: 6px;
-    margin-bottom: 8px;
-    font-size: 0.9rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    max-height: 30px;
-  }
-  
-  .newDimensionFields {
-    display: flex;
-    gap: 8px;
-    margin-top: 10px;
-  }
-  
-  .dimensionInput {
-    width: 30%;
-    padding: 8px;
-    font-size: 0.9rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .addDimensionButton {
-    padding: 8px;
-    font-size: 0.9rem;
-    cursor: pointer;
-    background-color: transparent;
-    color: rgb(22, 22, 22);
-    border: 1px solid rgb(22, 22, 22);
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 38px;
-  }
-  
-  .submitButton {
-    width: 100%;
-    padding: 10px;
-    font-size: 1rem;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 15px;
-  }
-  
-  .submitButton:hover {
-    background-color: #218838;
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure this is high enough to overlay all elements */
+}
 
-  /* Add this style for the container */
-.formGroup {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1rem;
-  }
-  
-  /* Align the file input and image in a row */
-  .imageUploadContainer {
-    display: flex;
-    align-items: center;
-    gap: 10px; /* Add spacing between input and image */
-  }
-  
-  /* Style for the tiny image */
-  .tinyImage {
-    width: 50px;
-    height: auto;
-    border-radius: 4px;
-  }
+.formContainer {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: fixed; /* Ensures the modal is positioned relative to the viewport */
+  z-index: 1010; /* Must be higher than the overlay */
+}
+
+.scrollableContent {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="password"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+textarea,
+select {
+  width: 90%;
+  padding: 6px;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  max-height: 30px;
+}
+
+.submitButton {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+.submitButton:hover {
+  background-color: #218838;
+}
+
+.imageUploadContainer {
+  display: flex;
+  align-items: center; 
+  gap: 15px; 
+  margin-bottom: 8px; 
+}
+
+.tinyImage {
+  width: 50px;  
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

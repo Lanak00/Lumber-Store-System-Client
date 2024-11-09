@@ -8,17 +8,21 @@ function CuttingList({ hideCuttingList, handleAddCuttingListToCart, productPrice
   const [totalPrice, setTotalPrice] = useState(0);
   const [isLoading, setIsLoading] = useState(false); // New loading state
 
-  const isFormValid = currentEntry.width && currentEntry.height && currentEntry.amount;
+  // Define board width and height here
+  const boardWidth = 275;
+  const boardHeight = 208;
 
-  // Function to handle input changes
+  const isFormValid = currentEntry.width && currentEntry.height && currentEntry.amount && 
+                      parseInt(currentEntry.width) <= boardWidth && 
+                      parseInt(currentEntry.height) <= boardHeight;
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setCurrentEntry({ ...currentEntry, [name]: value });
   };
 
-  // Function to call API and calculate number of boards
   const calculateBoards = async (cuttingList) => {
-    setIsLoading(true); // Show loader
+    setIsLoading(true); 
     try {
       const response = await fetch('https://localhost:7046/api/Cutting/CalculateBoards', {
         method: 'POST',
@@ -26,8 +30,8 @@ function CuttingList({ hideCuttingList, handleAddCuttingListToCart, productPrice
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          boardWidth: 275,
-          boardHeight: 208,
+          boardWidth,
+          boardHeight,
           cuttingList: cuttingList.map(item => ({
             width: parseInt(item.width, 10),
             length: parseInt(item.height, 10),
@@ -52,12 +56,14 @@ function CuttingList({ hideCuttingList, handleAddCuttingListToCart, productPrice
       setNumberOfBoards(0);
       setTotalPrice(0);
     } finally {
-      setIsLoading(false); // Hide loader
+      setIsLoading(false);
     }
   };
 
   // Add an item to the cutting list and calculate the number of boards
   const addCuttingListItem = () => {
+    if (!isFormValid) return;
+
     const updatedCuttingList = [...cuttingList, currentEntry];
     setCuttingList(updatedCuttingList);
     localStorage.setItem('cuttingList', JSON.stringify(updatedCuttingList));
@@ -92,6 +98,8 @@ function CuttingList({ hideCuttingList, handleAddCuttingListToCart, productPrice
           value={currentEntry.width}
           onChange={handleInputChange}
           className={classes.cuttingListInput}
+          min="1"
+          max={boardWidth} // Adding max validation in input element
         />
         <input
           type="number"
@@ -100,6 +108,8 @@ function CuttingList({ hideCuttingList, handleAddCuttingListToCart, productPrice
           value={currentEntry.height}
           onChange={handleInputChange}
           className={classes.cuttingListInput}
+          min="1"
+          max={boardHeight} // Adding max validation in input element
         />
         <input
           type="number"
@@ -108,6 +118,7 @@ function CuttingList({ hideCuttingList, handleAddCuttingListToCart, productPrice
           value={currentEntry.amount}
           onChange={handleInputChange}
           className={classes.cuttingListInput}
+          min="1"
         />
         <button
           onClick={addCuttingListItem}

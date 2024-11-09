@@ -66,8 +66,8 @@ function ProductDetailsItem({ image, name, type, manufacturer, description, pric
       if (!response.ok) throw new Error('Failed to fetch product data');
 
       const data = await response.json();
-      setProductData(data); // Set fetched product data in state
-      setIsEditFormOpen(true); // Open the form after data is fetched
+      setProductData(data); 
+      setIsEditFormOpen(true); 
     } catch (error) {
       console.error('Error fetching product data:', error);
       alert('Failed to load product data for editing');
@@ -76,7 +76,7 @@ function ProductDetailsItem({ image, name, type, manufacturer, description, pric
 
   const closeEditForm = () => {
     setIsEditFormOpen(false);
-    setProductData(null); // Clear fetched data when form is closed
+    setProductData(null); 
   };
 
   const getCategoryName = (type) => {
@@ -102,17 +102,17 @@ function ProductDetailsItem({ image, name, type, manufacturer, description, pric
         <p className={classes.productPrice}>{price.toFixed(2)} RSD / {unit}</p>
 
         {userRole === 'Client' && (
-          <div className={classes.actions}>
-            <div className={classes.amountControl}>
+          <div className={classes.actionsGroup}>
+            <div>
               {categoryName === 'Plocasti materijali' ? (
-                <>
-                  <button onClick={decreaseAmount} className={classes.decreaseButton}>-</button>
-                  <input type="number" min="1" value={amount} onChange={handleAmountChange} className={classes.amountInput} />
-                  <button onClick={increaseAmount} className={classes.increaseButton}>+</button>
-                </>
+                <div className={classes.amountControlGroup}>
+                  <button onClick={decreaseAmount} className={classes.decreaseButtonField}>-</button>
+                  <input type="number" min="1" value={amount} onChange={handleAmountChange} className={classes.amountInputField} />
+                  <button onClick={increaseAmount} className={classes.increaseButtonField}>+</button>
+                </div>
               ) : (
-                <div className={classes.cubicMeterControl}>
-                  <input type="number" min="0" step="0.01" value={amount} onChange={handleAmountChange} className={classes.amountInput} inputMode="decimal" />
+                <div className={classes.quantityWrapper}>
+                  <input type="number" min="0" step="0.01" value={amount} onChange={handleAmountChange} className={classes.quantityInputCubic} inputMode="decimal" />
                   <span className={classes.cubicMeterLabel}>m³</span>
                 </div>
               )}

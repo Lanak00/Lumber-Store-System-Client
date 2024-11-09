@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import UserItem from '../components/user/UserItem';
-import AdminRegistrationForm from '../components/user/AdminRegistrationForm'; // Import the form
-import styles from '../components/user/UsersPage.module.css';
+import AdminRegistrationForm from '../components/user/AdminRegistrationForm';
+import classes from '../components/orders/MyOrdersPage.module.css'; // Import the styles for users page
+import buttonStyles from '../components/products/AllProductsPage.module.css'; // Import button styles
 
 function UsersPage() {
   const [users, setUsers] = useState([]);
@@ -55,36 +56,36 @@ function UsersPage() {
   };
 
   return (
-    <div className={styles.usersPage}>
-      <div className={styles.tabs}>
+    <div className={classes.ordersPage}>
+      <div className={classes.tabs}>
         <span
           onClick={() => handleTabChange('employees')}
-          className={`${styles.tab} ${activeTab === 'employees' ? styles.active : ''}`}
+          className={`${classes.tab} ${activeTab === 'employees' ? classes.active : ''}`}
         >
           Zaposleni
         </span>
         <span
           onClick={() => handleTabChange('clients')}
-          className={`${styles.tab} ${activeTab === 'clients' ? styles.active : ''}`}
+          className={`${classes.tab} ${activeTab === 'clients' ? classes.active : ''}`}
         >
           Klijenti
         </span>
         <span
           onClick={() => handleTabChange('administrators')}
-          className={`${styles.tab} ${activeTab === 'administrators' ? styles.active : ''}`}
+          className={`${classes.tab} ${activeTab === 'administrators' ? classes.active : ''}`}
         >
           Administratori
         </span>
       </div>
 
-      <div className={styles.usersContainer}>
+      <div className={classes.ordersContainer}>
         {filteredUsers.map(user => (
           <UserItem user={user} key={user.id} />
         ))}
       </div>
-      
+
       {(userRole === 'Administrator') && (
-        <button className={styles.addUserButton} onClick={handleAddUserClick}>
+        <button className={buttonStyles.addProductButton} onClick={handleAddUserClick}>
           +
         </button>
       )}
